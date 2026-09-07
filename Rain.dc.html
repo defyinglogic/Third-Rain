@@ -154,7 +154,7 @@ html{-webkit-tap-highlight-color:transparent}
   .contact-invite-text{max-width:none;white-space:nowrap;line-height:1.2}
 }
 </style>
-<link rel="stylesheet" href="./rain-flow.css?v=50-window">
+<link rel="stylesheet" href="./rain-flow.css?v=51-accepting">
 <script src="./image-slot.js"></script>
 <script src="./rainfall.js" defer></script>
 <script src="./rain-flow.js?v=49-art" defer></script>
@@ -463,28 +463,28 @@ html{-webkit-tap-highlight-color:transparent}
   <div class="advisory__sky" aria-hidden="true">
     <div class="advisory__sheet"></div>
     <div class="advisory__pool"></div>
-    <p class="advisory__ghost">pour.</p>
+    <p class="advisory__ghost">rain.</p>
   </div>
   <div class="advisory__frame">
     <div class="advisory__copy">
       <p class="advisory__eyebrow">Last call</p>
-      <h2 class="advisory__title">Let it <em>pour.</em></h2>
-      <p class="advisory__art" aria-label="Let it rain">
+      <h2 class="advisory__title">Let it <em>rain.</em></h2>
+      <p class="advisory__art" aria-label="Let it pour">
         <span class="advisory__art-line" aria-hidden="true"></span>
-        <span class="advisory__art-text">Let it <i>rain</i></span>
+        <span class="advisory__art-text">Let it <i>pour</i></span>
         <span class="advisory__art-line" aria-hidden="true"></span>
       </p>
       <div class="advisory__invite">
         <div class="advisory__invite-row">
           <span class="advisory__invite-dot" aria-hidden="true"></span>
-          <span class="advisory__invite-live">Open window</span>
+          <span class="advisory__invite-live">Currently accepting projects</span>
         </div>
         <p class="advisory__invite-title">Invitation only</p>
-        <p class="advisory__invite-sub">Rain takes a handful of projects at a time, each run by the founder from first call to launch. If it's a fit, your invitation lands within a day.</p>
-        <ul class="advisory__invite-rows">
-          <li><span class="advisory__row-k">Response</span><span class="advisory__row-leader" aria-hidden="true"></span><span class="advisory__row-v">Within 24 hours</span></li>
-          <li><span class="advisory__row-k">Sales team</span><span class="advisory__row-leader" aria-hidden="true"></span><span class="advisory__row-v">None</span></li>
-          <li><span class="advisory__row-k">Run by</span><span class="advisory__row-leader" aria-hidden="true"></span><span class="advisory__row-v">The founder</span></li>
+        <p class="advisory__invite-sub">Rain takes a handful of projects at a time, each run by the founder from first call to launch.</p>
+        <ul class="advisory__invite-points">
+          <li>Every inquiry gets a personal reply <em>within 24 hours</em>.</li>
+          <li>No sales team — you talk to <em>the person who builds it</em>.</li>
+          <li>Tell us the situation. <em>If it's a fit, you're in.</em></li>
         </ul>
       </div>
     </div>
@@ -510,7 +510,7 @@ html{-webkit-tap-highlight-color:transparent}
             <button type="button" data-chip="Everything" onClick="{{ toggleChip }}">Everything</button>
           </div>
         </div>
-        <div><label class="flow-label" data-rf="contact.form.label.situation">THE SITUATION</label><textarea ref="{{ msgRef }}" rows="3" placeholder="How can Rain make your business better?" class="flow-input"></textarea></div>
+        <div class="landfall-form__grow"><label class="flow-label" data-rf="contact.form.label.situation">THE SITUATION</label><textarea ref="{{ msgRef }}" rows="3" placeholder="How can Rain make your business better?" class="flow-input"></textarea></div>
         <a href="#" class="flow-send" onClick="{{ sendStorm }}">
           <span ref="{{ btnWater }}" class="flow-send__water"><span class="flow-send__wave" aria-hidden="true"></span></span>
           <span data-send-label="t" class="flow-send__label">Send it</span>
