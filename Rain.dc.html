@@ -167,7 +167,6 @@ html{-webkit-tap-highlight-color:transparent}
   <a href="#" onClick="{{ goTop }}" style="font-family:'Instrument Serif',serif;font-style:italic;font-size:38px;line-height:1;color:#eef5ff;display:inline-flex;align-items:baseline;">ra<span style="position:relative;display:inline-block;">ı<svg aria-hidden="true" viewBox="0 0 10 14" style="position:absolute;top:0;left:57%;transform:translateX(-50%);width:8px;height:11px;overflow:visible;filter:drop-shadow(0 0 6px var(--accent-glow));"><path d="M5 0C5 0 .8 5.6 .8 8.8a4.2 4.2 0 0 0 8.4 0C9.2 5.6 5 0 5 0Z" fill="var(--accent)"></path></svg></span>n<span style="color:var(--accent);">.</span></a>
   <div class="nav-links" style="display:flex;align-items:center;gap:clamp(14px,2.6vw,32px);flex-wrap:wrap;justify-content:flex-end;">
     <a href="#" onClick="{{ goServices }}" style="font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:#93aecd;" data-rf="nav.link.services">Services</a>
-    <a href="#" onClick="{{ goWork }}" style="font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:#93aecd;" data-rf="nav.link.work">Work</a>
     <a href="#" class="nav-cta" onClick="{{ goContact }}" style="font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#dcecff;border:1px solid rgba(120,180,255,.35);padding:11px 22px;border-radius:999px;transition:all .3s ease;" style-hover="background:var(--accent-soft);border-color:var(--accent);box-shadow:0 0 24px var(--accent-glow);color:#ffffff;" data-rf="nav.cta">Start a project</a>
   </div>
 </nav>
@@ -358,71 +357,6 @@ html{-webkit-tap-highlight-color:transparent}
   </div>
 </section>
 
-<section class="cascade" ref="{{ workRef }}" data-screen-label="Selected Work">
-  <div class="cascade__shell">
-    <p class="cascade__eyebrow">Selected work</p>
-    <h2 class="cascade__title">Work that made it <em>rain.</em></h2>
-
-    <div class="cascade__grid" data-cascade>
-      <a class="cascade__card cascade__card--live" data-cascade-card href="https://www.castleofchaos.com/" target="_blank" rel="noopener" style="--d:0">
-        <div class="cascade__flip">
-          <div class="cascade__face">
-            <div class="cascade__glass" aria-hidden="true"></div>
-            <div class="cascade__shot">
-              <span class="cascade__chrome" aria-hidden="true"><i></i><i></i><i></i><em>castleofchaos.com</em></span>
-              <span class="cascade__scroll"><img src="./work/coc-full.jpg" alt="" loading="lazy"></span>
-            </div>
-            <div class="cascade__info">
-              <span class="cascade__num">01</span>
-              <h3 class="cascade__name">Castle of Chaos</h3>
-              <p class="cascade__meta">Haunted attractions</p>
-              <span class="cascade__cta">Visit live site &nearr;</span>
-            </div>
-          </div>
-        </div>
-      </a>
-
-      <a class="cascade__card cascade__card--live" data-cascade-card href="https://topautoaesthetics.com/" target="_blank" rel="noopener" style="--d:1">
-        <div class="cascade__flip">
-          <div class="cascade__face">
-            <div class="cascade__glass" aria-hidden="true"></div>
-            <div class="cascade__shot">
-              <span class="cascade__chrome" aria-hidden="true"><i></i><i></i><i></i><em>topautoaesthetics.com</em></span>
-              <span class="cascade__scroll"><img src="./work/taa-full.jpg?v=2" alt="" loading="lazy"></span>
-            </div>
-            <div class="cascade__info">
-              <span class="cascade__num">02</span>
-              <h3 class="cascade__name">Top Auto Aesthetics</h3>
-              <p class="cascade__meta">Automotive aesthetics</p>
-              <span class="cascade__cta">Visit live site &nearr;</span>
-            </div>
-          </div>
-        </div>
-      </a>
-
-      <a class="cascade__card cascade__card--live" data-cascade-card href="https://wallderm.com/" target="_blank" rel="noopener" style="--d:2">
-        <div class="cascade__flip">
-          <div class="cascade__face">
-            <div class="cascade__glass" aria-hidden="true"></div>
-            <div class="cascade__shot">
-              <span class="cascade__chrome" aria-hidden="true"><i></i><i></i><i></i><em>wallderm.com</em></span>
-              <span class="cascade__scroll"><img src="./work/wallderm-full.jpg?v=3" alt="" loading="lazy"></span>
-            </div>
-            <div class="cascade__info">
-              <span class="cascade__num">03</span>
-              <h3 class="cascade__name">Wall Dermatology</h3>
-              <p class="cascade__meta">Dermatology + aesthetics</p>
-              <span class="cascade__cta">Visit live site &nearr;</span>
-            </div>
-          </div>
-        </div>
-      </a>
-    </div>
-
-    <p class="cascade__note">Live projects &mdash; more work available on request</p>
-  </div>
-</section>
-
 <section class="advisory" ref="{{ contactRef }}" data-screen-label="Contact">
   <div class="advisory__sky" aria-hidden="true">
     <canvas class="advisory__stormsky" data-storm-shader data-src="./img/storm-sky.jpg?v=2" data-warp="0.026" data-drift="1" data-lightning="1" data-parallax="0.06" data-fade="0.12"></canvas>
@@ -517,7 +451,6 @@ class Component extends DCLogic {
     this.servicesRef = React.createRef();
     this.aiRef = React.createRef();
     this.founderRef = React.createRef();
-    this.workRef = React.createRef();
     this.contactRef = React.createRef();
     this.radarCanvas = React.createRef();
     this.emailRef = React.createRef();
@@ -1479,7 +1412,6 @@ class Component extends DCLogic {
       goServices: this.goTo(this.servicesRef),
       goAI: this.goTo(this.aiRef),
       goFounder: this.goTo(this.founderRef),
-      goWork: this.goTo(this.workRef), workRef: this.workRef,
       goContact: this.goTo(this.contactRef)
     };
   }
