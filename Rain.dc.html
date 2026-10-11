@@ -154,10 +154,11 @@ html{-webkit-tap-highlight-color:transparent}
   .contact-invite-text{max-width:none;white-space:nowrap;line-height:1.2}
 }
 </style>
-<link rel="stylesheet" href="./rain-flow.css?v=51-accepting">
+<link rel="stylesheet" href="./rain-flow.css?v=74-three">
 <script src="./image-slot.js"></script>
 <script src="./rainfall.js" defer></script>
-<script src="./rain-flow.js?v=49-art" defer></script>
+<script src="./rain-flow.js?v=74-three" defer></script>
+<script src="./storm-fx.js?v=74-three" defer></script>
 </helmet>
 <canvas ref="{{ rainCanvas }}" style="position:fixed;inset:0;width:100vw;height:100vh;z-index:0;pointer-events:none;"></canvas>
 <div ref="{{ flashRef }}" style="position:fixed;inset:0;z-index:46;pointer-events:none;opacity:0;background:radial-gradient(120% 90% at 50% -10%, rgba(215,232,255,.9), rgba(120,170,255,.25) 45%, transparent 70%);mix-blend-mode:screen;"></div>
@@ -167,7 +168,6 @@ html{-webkit-tap-highlight-color:transparent}
   <div class="nav-links" style="display:flex;align-items:center;gap:clamp(14px,2.6vw,32px);flex-wrap:wrap;justify-content:flex-end;">
     <a href="#" onClick="{{ goServices }}" style="font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:#93aecd;" data-rf="nav.link.services">Services</a>
     <a href="#" onClick="{{ goWork }}" style="font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:#93aecd;" data-rf="nav.link.work">Work</a>
-    <a href="#" onClick="{{ goFounder }}" style="font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:#93aecd;" data-rf="nav.link.founder">Founder</a>
     <a href="#" class="nav-cta" onClick="{{ goContact }}" style="font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#dcecff;border:1px solid rgba(120,180,255,.35);padding:11px 22px;border-radius:999px;transition:all .3s ease;" style-hover="background:var(--accent-soft);border-color:var(--accent);box-shadow:0 0 24px var(--accent-glow);color:#ffffff;" data-rf="nav.cta">Start a project</a>
   </div>
 </nav>
@@ -218,6 +218,7 @@ html{-webkit-tap-highlight-color:transparent}
       <div class="storms__pin">
         <div class="svc-card">
           <canvas ref="{{ webCardCanvas }}"></canvas>
+          <div class="storms__glass" aria-hidden="true"></div>
           <div class="storms__sheen" aria-hidden="true"></div>
           <div class="storms__veil" aria-hidden="true"></div>
           <span data-svc-num="">01</span>
@@ -236,6 +237,7 @@ html{-webkit-tap-highlight-color:transparent}
       <div class="storms__pin">
         <div class="svc-card">
           <canvas ref="{{ appsCardCanvas }}"></canvas>
+          <div class="storms__glass" aria-hidden="true"></div>
           <div class="storms__sheen" aria-hidden="true"></div>
           <div class="storms__veil" aria-hidden="true"></div>
           <span data-svc-num="">02</span>
@@ -254,6 +256,7 @@ html{-webkit-tap-highlight-color:transparent}
       <div class="storms__pin">
         <div class="svc-card">
           <canvas ref="{{ revCardCanvas }}"></canvas>
+          <div class="storms__glass" aria-hidden="true"></div>
           <div class="storms__sheen" aria-hidden="true"></div>
           <div class="storms__veil" aria-hidden="true"></div>
           <span data-svc-num="">03</span>
@@ -272,6 +275,7 @@ html{-webkit-tap-highlight-color:transparent}
       <div class="storms__pin" ref="{{ aiRef }}">
         <div class="svc-card">
           <canvas ref="{{ aiCardCanvas }}"></canvas>
+          <div class="storms__glass" aria-hidden="true"></div>
           <div class="storms__sheen" aria-hidden="true"></div>
           <div class="storms__veil" aria-hidden="true"></div>
           <span data-svc-num="">04</span>
@@ -290,6 +294,7 @@ html{-webkit-tap-highlight-color:transparent}
       <div class="storms__pin">
         <div class="svc-card">
           <canvas ref="{{ growthCardCanvas }}"></canvas>
+          <div class="storms__glass" aria-hidden="true"></div>
           <div class="storms__sheen" aria-hidden="true"></div>
           <div class="storms__veil" aria-hidden="true"></div>
           <span data-svc-num="">05</span>
@@ -353,114 +358,74 @@ html{-webkit-tap-highlight-color:transparent}
   </div>
 </section>
 
-<section class="gale" ref="{{ workRef }}" data-screen-label="Selected Work">
-  <div class="gale__head">
-    <div>
-      <p class="gale__eyebrow">Selected work</p>
-      <h2 class="gale__title">Work that made it <em>rain.</em></h2>
-    </div>
-    <p class="gale__hint" aria-hidden="true">Drag <span class="gale__hint-arrow">⟶</span></p>
-  </div>
-  <div class="gale__strip" data-gale="">
-    <article class="gale__panel gale__panel--live" style="--hue:255,106,90;">
-      <span class="gale__ghost" aria-hidden="true">001</span>
-      <p class="gale__ind">Haunted attractions — Live project</p>
-      <h3 class="gale__name">Castle of Chaos</h3>
-      <p class="gale__desc">Design &amp; build for one of America's premier haunted attractions — five levels of fear, built to sell out the season.</p>
-      <a class="gale__shot" href="https://www.castleofchaos.com/" target="_blank" rel="noopener">
-        <span class="gale__shot-bar" aria-hidden="true"><i></i><i></i><i></i><em>castleofchaos.com</em></span>
-        <span class="gale__shot-view"><img src="./work/coc-full.jpg" alt="The Castle of Chaos website, scrolling top to bottom" loading="lazy"></span>
-      </a>
-      <div class="gale__foot">
-        <a class="gale__visit" href="https://www.castleofchaos.com/" target="_blank" rel="noopener">Visit live site ↗</a>
-        <p class="gale__lab">castleofchaos.com</p>
-      </div>
-    </article>
-    <article class="gale__panel" style="--hue:86,185,255;">
-      <span class="gale__ghost" aria-hidden="true">002</span>
-      <p class="gale__ind">Private equity</p>
-      <h3 class="gale__name">Blueharbor Capital</h3>
-      <p class="gale__desc">Full rebrand, deal-room platform, and an AI-automated investor pipeline for a $2B fund.</p>
-      <div class="gale__foot">
-        <p class="gale__val">$6.8M</p>
-        <p class="gale__lab">Attributed revenue</p>
-      </div>
-    </article>
-    <article class="gale__panel" style="--hue:125,140,255;">
-      <span class="gale__ghost" aria-hidden="true">003</span>
-      <p class="gale__ind">Nightlife</p>
-      <h3 class="gale__name">Voltage After Dark</h3>
-      <p class="gale__desc">Brand, site, and a table-booking system with dynamic pricing for a three-venue nightlife group.</p>
-      <div class="gale__foot">
-        <p class="gale__val">+189%</p>
-        <p class="gale__lab">Table revenue</p>
-      </div>
-    </article>
-    <article class="gale__panel" style="--hue:63,224,200;">
-      <span class="gale__ghost" aria-hidden="true">004</span>
-      <p class="gale__ind">Medical aesthetics</p>
-      <h3 class="gale__name">Lumière Aesthetics</h3>
-      <p class="gale__desc">Booking platform and AI concierge that fills the calendar while the clinic sleeps.</p>
-      <div class="gale__foot">
-        <p class="gale__val">9,400</p>
-        <p class="gale__lab">Bookings a month</p>
-      </div>
-    </article>
-    <article class="gale__panel" style="--hue:183,201,255;">
-      <span class="gale__ghost" aria-hidden="true">005</span>
-      <p class="gale__ind">Exotic automotive</p>
-      <h3 class="gale__name">Vetta Motorcars</h3>
-      <p class="gale__desc">Digital showroom with allocation requests for a dealer whose cars sell before they land.</p>
-      <div class="gale__foot">
-        <p class="gale__val">$4.2M</p>
-        <p class="gale__lab">Allocation requests</p>
-      </div>
-    </article>
-    <article class="gale__panel" style="--hue:100,180,255;">
-      <span class="gale__ghost" aria-hidden="true">006</span>
-      <p class="gale__ind">Hospitality</p>
-      <h3 class="gale__name">Copperline Hotels</h3>
-      <p class="gale__desc">Direct-booking engine and brand site that cut the OTA middlemen out of the picture.</p>
-      <div class="gale__foot">
-        <p class="gale__val">+214%</p>
-        <p class="gale__lab">Direct bookings</p>
-      </div>
-    </article>
-    <article class="gale__panel" style="--hue:63,224,200;">
-      <span class="gale__ghost" aria-hidden="true">007</span>
-      <p class="gale__ind">Health systems</p>
-      <h3 class="gale__name">Solara Health</h3>
-      <p class="gale__desc">One scheduling and records platform rolled out across a twelve-clinic network.</p>
-      <div class="gale__foot">
-        <p class="gale__val">12</p>
-        <p class="gale__lab">Clinics live</p>
-      </div>
-    </article>
-  </div>
-  <div class="gale__meter" aria-hidden="true"><span data-gale-fill=""></span></div>
-  <p class="gale__note" data-rf="work.disclaimer">Castle of Chaos shown live — other names changed to protect the very profitable</p>
-</section>
+<section class="cascade" ref="{{ workRef }}" data-screen-label="Selected Work">
+  <div class="cascade__shell">
+    <p class="cascade__eyebrow">Selected work</p>
+    <h2 class="cascade__title">Work that made it <em>rain.</em></h2>
 
-<section class="basin" ref="{{ founderRef }}" data-screen-label="Founder" data-basin="">
-  <div class="basin__stage">
-    <p class="basin__eyebrow" data-rf="founder.label">The founder</p>
-    <div class="basin__copy">
-      <blockquote class="basin__quote" data-basin-quote="">Anyone can build with AI.<br><span class="basin__keep">Talent, creativity</span>, and purpose: <em data-rf="founder.quote.em">that takes decades</em>.</blockquote>
-      <p class="basin__role"><span data-rf="founder.badge">Michael Cassella — Founder</span></p>
-      <div class="basin__story">
-        <p>For two decades, Michael Cassella built high-end apps and websites for elite nightlife and A-list clients as founder and CEO of East Coast EFX. The work was always the same promise: one person, start to finish, nothing handed off.</p>
-        <p>Rain is that practice, continued. Every project is run by Michael himself — no account managers, no juniors learning on a client's dime. The standard that took decades to earn is the only one in the building.</p>
-      </div>
+    <div class="cascade__grid" data-cascade>
+      <a class="cascade__card cascade__card--live" data-cascade-card href="https://www.castleofchaos.com/" target="_blank" rel="noopener" style="--d:0">
+        <div class="cascade__flip">
+          <div class="cascade__face">
+            <div class="cascade__glass" aria-hidden="true"></div>
+            <div class="cascade__shot">
+              <span class="cascade__chrome" aria-hidden="true"><i></i><i></i><i></i><em>castleofchaos.com</em></span>
+              <span class="cascade__scroll"><img src="./work/coc-full.jpg" alt="" loading="lazy"></span>
+            </div>
+            <div class="cascade__info">
+              <span class="cascade__num">01</span>
+              <h3 class="cascade__name">Castle of Chaos</h3>
+              <p class="cascade__meta">Haunted attractions</p>
+              <span class="cascade__cta">Visit live site &nearr;</span>
+            </div>
+          </div>
+        </div>
+      </a>
+
+      <a class="cascade__card cascade__card--live" data-cascade-card href="https://topautoaesthetics.com/" target="_blank" rel="noopener" style="--d:1">
+        <div class="cascade__flip">
+          <div class="cascade__face">
+            <div class="cascade__glass" aria-hidden="true"></div>
+            <div class="cascade__shot">
+              <span class="cascade__chrome" aria-hidden="true"><i></i><i></i><i></i><em>topautoaesthetics.com</em></span>
+              <span class="cascade__scroll"><img src="./work/taa-full.jpg?v=2" alt="" loading="lazy"></span>
+            </div>
+            <div class="cascade__info">
+              <span class="cascade__num">02</span>
+              <h3 class="cascade__name">Top Auto Aesthetics</h3>
+              <p class="cascade__meta">Automotive aesthetics</p>
+              <span class="cascade__cta">Visit live site &nearr;</span>
+            </div>
+          </div>
+        </div>
+      </a>
+
+      <a class="cascade__card cascade__card--live" data-cascade-card href="https://wallderm.com/" target="_blank" rel="noopener" style="--d:2">
+        <div class="cascade__flip">
+          <div class="cascade__face">
+            <div class="cascade__glass" aria-hidden="true"></div>
+            <div class="cascade__shot">
+              <span class="cascade__chrome" aria-hidden="true"><i></i><i></i><i></i><em>wallderm.com</em></span>
+              <span class="cascade__scroll"><img src="./work/wallderm-full.jpg?v=3" alt="" loading="lazy"></span>
+            </div>
+            <div class="cascade__info">
+              <span class="cascade__num">03</span>
+              <h3 class="cascade__name">Wall Dermatology</h3>
+              <p class="cascade__meta">Dermatology + aesthetics</p>
+              <span class="cascade__cta">Visit live site &nearr;</span>
+            </div>
+          </div>
+        </div>
+      </a>
     </div>
-    <div class="basin__pool" aria-hidden="true">
-      <canvas ref="{{ waterCanvas }}"></canvas>
-      <div class="basin__pool-fade"></div>
-    </div>
+
+    <p class="cascade__note">Live projects &mdash; more work available on request</p>
   </div>
 </section>
 
 <section class="advisory" ref="{{ contactRef }}" data-screen-label="Contact">
   <div class="advisory__sky" aria-hidden="true">
+    <canvas class="advisory__stormsky" data-storm-shader data-src="./img/storm-sky.jpg?v=2" data-warp="0.026" data-drift="1" data-lightning="1" data-parallax="0.06" data-fade="0.12"></canvas>
     <div class="advisory__sheet"></div>
     <div class="advisory__pool"></div>
     <p class="advisory__ghost">rain.</p>
@@ -468,24 +433,18 @@ html{-webkit-tap-highlight-color:transparent}
   <div class="advisory__frame">
     <div class="advisory__copy">
       <p class="advisory__eyebrow">Last call</p>
-      <h2 class="advisory__title">Let it <em>rain.</em></h2>
-      <p class="advisory__art" aria-label="Let it pour">
+      <h2 class="advisory__art" aria-label="Let it rain">
         <span class="advisory__art-line" aria-hidden="true"></span>
-        <span class="advisory__art-text">Let it <i>pour</i></span>
+        <span class="advisory__art-text">Let it <i>rain</i></span>
         <span class="advisory__art-line" aria-hidden="true"></span>
-      </p>
+      </h2>
       <div class="advisory__invite">
-        <div class="advisory__invite-row">
-          <span class="advisory__invite-dot" aria-hidden="true"></span>
-          <span class="advisory__invite-live">Currently accepting projects</span>
-        </div>
-        <p class="advisory__invite-title">Invitation only</p>
-        <p class="advisory__invite-sub">Rain takes a handful of projects at a time, each run by the founder from first call to launch.</p>
-        <ul class="advisory__invite-points">
-          <li>Every inquiry gets a personal reply <em>within 24 hours</em>.</li>
-          <li>No sales team — you talk to <em>the person who builds it</em>.</li>
-          <li>Tell us the situation. <em>If it's a fit, you're in.</em></li>
-        </ul>
+        <span class="advisory__invite-dot" aria-hidden="true"></span>
+        <p class="advisory__invite-live">Taking clients by invitation only</p>
+      </div>
+      <div class="advisory__sig">
+        <blockquote class="advisory__sig-quote">Anyone can build with AI.<br>Talent, creativity, and purpose: <em>that takes decades</em>.</blockquote>
+        <p class="advisory__sig-byline">Michael Cassella — Founder</p>
       </div>
     </div>
     <div class="landfall-form">
@@ -510,7 +469,7 @@ html{-webkit-tap-highlight-color:transparent}
             <button type="button" data-chip="Everything" onClick="{{ toggleChip }}">Everything</button>
           </div>
         </div>
-        <div class="landfall-form__grow"><label class="flow-label" data-rf="contact.form.label.situation">THE SITUATION</label><textarea ref="{{ msgRef }}" rows="3" placeholder="How can Rain make your business better?" class="flow-input"></textarea></div>
+        <div><label class="flow-label" data-rf="contact.form.label.situation">THE SITUATION</label><textarea ref="{{ msgRef }}" rows="1" placeholder="How can Rain make your business better?" class="flow-input flow-input--situation"></textarea></div>
         <a href="#" class="flow-send" onClick="{{ sendStorm }}">
           <span ref="{{ btnWater }}" class="flow-send__water"><span class="flow-send__wave" aria-hidden="true"></span></span>
           <span data-send-label="t" class="flow-send__label">Send it</span>

@@ -151,6 +151,21 @@
     linear-gradient(0deg, rgba(2, 5, 10, 0.88), transparent 48%);
 }
 
+/* generated rain-on-glass texture, screen-blended over each card's canvas */
+.storms__glass {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: url('./img/storm-glass.jpg?v=2') center / cover no-repeat;
+  mix-blend-mode: screen;
+  opacity: 0.5;
+}
+
+.storms__pin:nth-child(2) .storms__glass { transform: scaleX(-1); opacity: 0.42; }
+.storms__pin:nth-child(3) .storms__glass { background-position: 15% 70%; opacity: 0.38; }
+.storms__pin:nth-child(4) .storms__glass { transform: scale(-1, -1); opacity: 0.45; }
+.storms__pin:nth-child(5) .storms__glass { background-position: 80% 20%; opacity: 0.36; }
+
 .storms [data-svc-num] {
   position: absolute;
   top: -4%;
@@ -311,7 +326,7 @@
   height: 0;
   background: linear-gradient(180deg, var(--accent), rgba(125, 140, 255, 0.85));
   box-shadow: 0 0 16px var(--accent-glow), 0 0 4px var(--accent);
-  transition: height 0.28s cubic-bezier(0.25, 0.7, 0.3, 1);
+  will-change: height;
 }
 
 .stormline__drop {
@@ -324,7 +339,7 @@
   border-radius: 50%;
   background: radial-gradient(circle at 40% 35%, #ffffff, var(--accent) 70%);
   box-shadow: 0 0 10px var(--accent), 0 0 20px var(--accent-glow);
-  transition: transform 0.28s cubic-bezier(0.25, 0.7, 0.3, 1), opacity 0.4s ease;
+  will-change: transform, opacity;
   pointer-events: none;
 }
 
@@ -479,6 +494,11 @@
     text-align: left;
     justify-self: start;
     padding-left: 44px;
+    transform: translateY(22px);
+  }
+
+  .stormline__step.is-lit .stormline__card {
+    transform: translateY(0);
   }
 
   .stormline__step:nth-child(odd) .stormline__body {
@@ -494,6 +514,329 @@
    03 · GALE — work (horizontal gallery)
    ═══════════════════════════════════════ */
 
+/* ═══════════════════════════════════════
+   03 · CASCADE — 3D flip-in work cards
+   ═══════════════════════════════════════ */
+
+.cascade {
+  --hue: 120, 190, 255;
+  background: rgba(4, 9, 16, 0.82);
+  border-top: 1px solid rgba(120, 170, 255, 0.07);
+  padding: clamp(72px, 10vw, 120px) 0 clamp(56px, 7vw, 88px);
+  overflow: hidden;
+}
+
+.cascade *, .cascade *::before, .cascade *::after { box-sizing: border-box; }
+
+.cascade__shell {
+  width: min(1200px, calc(100% - 48px));
+  margin: 0 auto;
+}
+
+.cascade__eyebrow {
+  margin: 0 0 18px;
+  font-family: 'Geist Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.cascade__title {
+  margin: 0 0 clamp(44px, 6vw, 72px);
+  font-family: 'Instrument Serif', serif;
+  font-weight: 400;
+  font-size: clamp(2.6rem, 5.5vw, 4.4rem);
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+  color: #eef5ff;
+}
+
+.cascade__title em {
+  font-style: italic;
+  color: var(--accent);
+}
+
+.cascade__grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(18px, 2.4vw, 28px);
+  perspective: 1600px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+/* ── card shell: starts face-down, flips in ── */
+
+.cascade__card {
+  position: relative;
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  aspect-ratio: 4 / 5.1;
+  perspective: 1200px;
+}
+
+.cascade__flip {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+  transform: rotateY(-92deg) translateZ(-40px) scale(0.92);
+  opacity: 0;
+  transform-origin: left center;
+  transition:
+    transform 0.95s cubic-bezier(0.22, 1.1, 0.32, 1),
+    opacity 0.55s ease;
+  transition-delay: calc(var(--d, 0) * 90ms);
+  will-change: transform;
+}
+
+.cascade__card.is-in .cascade__flip {
+  transform: rotateY(0deg) translateZ(0) scale(1);
+  opacity: 1;
+}
+
+.cascade__card.is-in.is-tilt .cascade__flip {
+  transition:
+    transform 0.12s ease-out,
+    opacity 0.55s ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cascade__flip {
+    transform: none;
+    opacity: 1;
+    transition: none;
+  }
+}
+
+.cascade__face {
+  position: absolute;
+  inset: 0;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid rgba(150, 205, 255, 0.22);
+  background:
+    linear-gradient(160deg, rgba(18, 36, 62, 0.92), rgba(4, 10, 20, 0.96)),
+    #050b14;
+  box-shadow:
+    0 24px 60px rgba(0, 0, 0, 0.45),
+    inset 0 1px 0 rgba(200, 230, 255, 0.08);
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+}
+
+/* wet glass layer */
+.cascade__glass {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  pointer-events: none;
+  background:
+    url('./img/storm-glass.jpg?v=2') center / cover no-repeat;
+  opacity: 0.22;
+  mix-blend-mode: screen;
+  filter: saturate(1.1) brightness(0.85);
+}
+
+.cascade__glass::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 60% 40% at 70% 85%, rgba(86, 185, 255, 0.18), transparent 70%),
+    linear-gradient(180deg, rgba(180, 220, 255, 0.06), transparent 35%);
+  pointer-events: none;
+}
+
+/* ripple canvas sits above glass */
+.cascade__ripple {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  border-radius: inherit;
+}
+
+/* live screenshot */
+.cascade__shot {
+  position: absolute;
+  inset: 0 0 34% 0;
+  overflow: hidden;
+  background: #030910;
+}
+
+.cascade__chrome {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  height: 28px;
+  padding: 0 12px;
+  background: rgba(6, 12, 22, 0.85);
+  border-bottom: 1px solid rgba(140, 190, 255, 0.12);
+  font-family: 'Geist Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.14em;
+  color: #6e8cb0;
+}
+
+.cascade__chrome i {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: rgba(140, 190, 255, 0.25);
+}
+
+.cascade__chrome em {
+  margin-left: auto;
+  font-style: normal;
+}
+
+.cascade__scroll {
+  display: block;
+  position: absolute;
+  inset: 28px 0 0;
+  overflow: hidden;
+}
+
+.cascade__scroll img {
+  display: block;
+  width: 100%;
+  height: auto;
+  transform: translateY(0);
+  transition: transform 8s ease-in-out;
+}
+
+.cascade__card--live:hover .cascade__scroll img,
+.cascade__card--live:focus-visible .cascade__scroll img {
+  transform: translateY(calc(-100% + 220px));
+}
+
+.cascade__info {
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  z-index: 3;
+  padding: 18px 20px 20px;
+  background: linear-gradient(180deg, transparent, rgba(3, 8, 16, 0.92) 28%);
+}
+
+.cascade__info--center {
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 28px 24px;
+  background:
+    radial-gradient(ellipse 70% 50% at 50% 40%, rgba(20, 48, 84, 0.55), transparent 70%),
+    linear-gradient(180deg, rgba(4, 10, 20, 0.2), rgba(4, 10, 20, 0.85));
+}
+
+.cascade__num {
+  display: block;
+  font-family: 'Geist Mono', monospace;
+  font-size: 9.5px;
+  letter-spacing: 0.24em;
+  color: #5d7ca6;
+  margin-bottom: 8px;
+}
+
+.cascade__name {
+  margin: 0;
+  font-family: 'Instrument Serif', serif;
+  font-weight: 400;
+  font-size: clamp(1.35rem, 1.8vw, 1.65rem);
+  line-height: 1.1;
+  letter-spacing: -0.015em;
+  color: #f0f6ff;
+}
+
+.cascade__meta {
+  margin: 8px 0 0;
+  font-family: 'Geist Mono', monospace;
+  font-size: 9.5px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #7d97b8;
+}
+
+.cascade__cta {
+  display: inline-block;
+  margin-top: 12px;
+  font-family: 'Geist Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.cascade__stat {
+  margin: 0 0 6px;
+  font-family: 'Unbounded', sans-serif;
+  font-weight: 500;
+  font-size: clamp(2.4rem, 3.4vw, 3rem);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--accent);
+  text-shadow: 0 0 36px rgba(86, 185, 255, 0.45);
+}
+
+.cascade__statlab {
+  margin: 0 0 22px;
+  font-family: 'Geist Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: #a9c4e4;
+}
+
+.cascade__info--center .cascade__name {
+  margin-top: 4px;
+}
+
+.cascade__info--center .cascade__num {
+  position: absolute;
+  top: 18px;
+  left: 20px;
+}
+
+.cascade__note {
+  margin: clamp(28px, 4vw, 40px) 0 0;
+  font-family: 'Geist Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #55708f;
+}
+
+@media (max-width: 960px) {
+  .cascade__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .cascade__grid {
+    grid-template-columns: 1fr;
+    max-width: 420px;
+    margin: 0 auto;
+  }
+
+  .cascade__card {
+    aspect-ratio: 4 / 4.6;
+  }
+
+  .cascade__card--live:hover .cascade__scroll img,
+  .cascade__card--live:focus-visible .cascade__scroll img {
+    transform: translateY(calc(-100% + 200px));
+  }
+}
 .gale {
   background: rgba(4, 9, 16, 0.82);
   border-top: 1px solid rgba(120, 170, 255, 0.07);
@@ -589,9 +932,15 @@
   border: 1px solid rgba(var(--hue), 0.22);
   background:
     radial-gradient(120% 90% at 85% -10%, rgba(var(--hue), 0.16), transparent 55%),
-    linear-gradient(200deg, rgba(var(--hue), 0.06), rgba(3, 7, 13, 0.9) 60%),
+    linear-gradient(200deg, rgba(var(--hue), 0.1), rgba(3, 7, 13, 0.82) 60%),
+    url('./img/storm-glass.jpg?v=2') center / cover no-repeat,
     #04080f;
+  background-blend-mode: normal, normal, screen, normal;
   transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.25, 1), border-color 0.4s ease;
+}
+
+.gale__panel:nth-child(even) {
+  background-position: center, center, 18% 65%, center;
 }
 
 .gale__panel:hover {
@@ -629,7 +978,6 @@
   line-height: 1;
   letter-spacing: -0.015em;
   color: #f2f8ff;
-  max-width: 12ch;
   text-wrap: balance;
 }
 
@@ -682,7 +1030,7 @@
   border-radius: 8px;
   overflow: hidden;
   border: 1px solid rgba(var(--hue), 0.32);
-  background: #0a0508;
+  background: #030a14;
   box-shadow: 0 18px 44px rgba(0, 0, 0, 0.45);
 }
 
@@ -696,7 +1044,7 @@
   align-items: center;
   gap: 6px;
   padding: 9px 12px;
-  background: rgba(12, 7, 9, 0.94);
+  background: rgba(3, 8, 16, 0.94);
   border-bottom: 1px solid rgba(var(--hue), 0.22);
 }
 
@@ -902,27 +1250,6 @@
   transform: none;
 }
 
-.basin__story {
-  width: 0;
-  min-width: 100%;
-  margin: 32px 0 0;
-  padding: 24px 0 0;
-  border-top: 1px solid rgba(140, 190, 255, 0.14);
-  text-align: left;
-}
-
-.basin__story p {
-  margin: 0 0 14px;
-  font-weight: 300;
-  font-size: 15.5px;
-  line-height: 1.7;
-  color: #b6cae2;
-}
-
-.basin__story p:last-child {
-  margin-bottom: 0;
-}
-
 .basin__pool {
   position: relative;
   width: 100%;
@@ -982,6 +1309,17 @@
   inset: 0;
   pointer-events: none;
   z-index: 0;
+}
+
+/* generated storm sky with in-cloud lightning, driven by storm-fx.js */
+.advisory__stormsky {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  opacity: 0.95;
+  filter: brightness(1.3);
 }
 
 .advisory__sheet {
@@ -1054,13 +1392,13 @@
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(380px, 44%);
   gap: clamp(36px, 5vw, 72px);
-  align-items: stretch;
+  align-items: start;
 }
 
 .advisory__copy {
   position: relative;
   min-width: 0;
-  max-width: 34rem;
+  max-width: 36rem;
   display: flex;
   flex-direction: column;
   align-items: stretch;
@@ -1069,47 +1407,30 @@
 }
 
 .advisory__eyebrow {
-  margin: 0 0 8px;
+  margin: 0 0 14px;
   font-family: 'Geist Mono', monospace;
   font-size: 11px;
   letter-spacing: 0.32em;
   text-transform: uppercase;
   color: var(--accent);
-}
-
-.advisory__title {
-  margin: 0;
-  text-align: left;
-  font-family: 'Instrument Serif', serif;
-  font-weight: 400;
-  font-size: clamp(4.2rem, 9.5vw, 8.4rem);
-  line-height: 0.86;
-  letter-spacing: -0.045em;
-  color: #f6faff;
-  max-width: none;
-  white-space: nowrap;
-}
-
-.advisory__title em {
-  font-style: italic;
-  color: var(--accent);
-  text-shadow: 0 0 90px rgba(86, 185, 255, 0.4);
+  text-align: center;
 }
 
 .advisory__art {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 18px;
+  gap: clamp(14px, 2vw, 22px);
   width: 100%;
-  margin: 28px 0 0;
-  padding: 8px 0;
+  margin: 0;
+  padding: 0;
+  font-weight: 400;
 }
 
 .advisory__art-line {
   display: block;
-  flex: 1 1 40px;
-  max-width: 72px;
+  flex: 1 1 48px;
+  max-width: 88px;
   height: 1px;
   background: linear-gradient(90deg, transparent, rgba(160, 205, 255, 0.55), transparent);
 }
@@ -1118,131 +1439,109 @@
   flex: none;
   font-family: 'Instrument Serif', serif;
   font-weight: 400;
-  font-size: clamp(1.85rem, 3.8vw, 2.85rem);
-  line-height: 1;
-  letter-spacing: 0.02em;
+  font-size: clamp(3.6rem, 9vw, 7.2rem);
+  line-height: 0.9;
+  letter-spacing: -0.02em;
   color: #e8f1ff;
   text-align: center;
   white-space: nowrap;
   text-shadow:
-    0 0 40px rgba(86, 185, 255, 0.22),
-    0 12px 40px rgba(0, 0, 0, 0.35);
+    0 0 50px rgba(86, 185, 255, 0.28),
+    0 14px 48px rgba(0, 0, 0, 0.35);
 }
 
 .advisory__art-text i {
   font-style: italic;
   color: var(--accent);
-  letter-spacing: -0.01em;
-  text-shadow: 0 0 50px rgba(86, 185, 255, 0.45);
+  letter-spacing: -0.02em;
+  text-shadow: 0 0 60px rgba(86, 185, 255, 0.5);
 }
 
 .advisory__invite {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 12px;
-  width: 100%;
-  max-width: none;
-  margin: clamp(28px, 4vw, 44px) 0 0;
-  padding: clamp(24px, 3vw, 36px) clamp(24px, 3vw, 34px);
-  border: 1px solid rgba(160, 205, 255, 0.26);
-  border-radius: 10px;
-  background: rgba(4, 10, 20, 0.72);
-  box-shadow: inset 0 1px 0 rgba(200, 225, 255, 0.08);
-}
-
-.advisory__invite-row {
   display: flex;
   align-items: center;
-  gap: 9px;
-}
-
-.advisory__invite-live {
-  font-family: 'Geist Mono', monospace;
-  font-size: 10.5px;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: #8ff0b8;
-  text-shadow: 0 0 14px rgba(61, 220, 132, 0.45);
-}
-
-.advisory__invite-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: #3ddc84;
-  box-shadow: 0 0 14px rgba(61, 220, 132, 0.9);
-  animation: liveBlink 1.4s ease-in-out infinite;
-  flex: none;
-}
-
-@keyframes liveBlink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.2; }
-}
-
-.advisory__invite-title {
-  margin: 0;
-  font-family: 'Instrument Serif', serif;
-  font-size: clamp(1.7rem, 2.6vw, 2.2rem);
-  line-height: 1.1;
-  letter-spacing: -0.02em;
-  color: #f2f7ff;
-}
-
-.advisory__invite-sub {
-  margin: 0;
-  font-size: 15px;
-  font-weight: 300;
-  line-height: 1.7;
-  color: #a8bdd4;
-  text-wrap: pretty;
-}
-
-.advisory__invite-points {
-  list-style: none;
-  margin: 6px 0 0;
+  justify-content: center;
+  gap: 14px;
+  width: 100%;
+  max-width: 560px;
+  margin: 38px auto 0;
   padding: 0;
 }
 
-.advisory__invite-points li {
-  position: relative;
-  padding: 11px 0 11px 24px;
-  font-size: 14.5px;
-  font-weight: 300;
-  line-height: 1.6;
-  color: #c3d5ea;
-  border-top: 1px dashed rgba(120, 170, 255, 0.12);
-}
-
-.advisory__invite-points li:first-child {
-  border-top: 1px solid rgba(120, 170, 255, 0.16);
-  margin-top: 4px;
-}
-
-.advisory__invite-points li::before {
+.advisory__invite::before,
+.advisory__invite::after {
   content: '';
-  position: absolute;
-  left: 3px;
-  top: 1.12em;
-  width: 6px;
-  height: 6px;
+  flex: 1;
+  height: 1px;
+  min-width: 24px;
+}
+
+.advisory__invite::before {
+  background: linear-gradient(90deg, transparent, rgba(140, 195, 255, 0.3));
+}
+
+.advisory__invite::after {
+  background: linear-gradient(90deg, rgba(140, 195, 255, 0.3), transparent);
+}
+
+.advisory__invite-live {
+  margin: 0;
+  font-family: 'Geist Mono', monospace;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12.5px;
+  line-height: 1.5;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--accent);
+  text-align: center;
+}
+
+.advisory__invite-dot {
+  width: 7px;
+  height: 7px;
   border-radius: 50%;
   background: var(--accent);
-  box-shadow: 0 0 10px var(--accent-glow);
+  box-shadow: 0 0 12px var(--accent), 0 0 24px rgba(86, 185, 255, 0.4);
+  animation: glowPulse 1.8s ease-in-out infinite;
+  flex: none;
 }
 
-.advisory__invite-points em {
-  font-style: normal;
-  color: #eaf3ff;
+/* founder sign-off beneath the invite line */
+.advisory__sig {
+  margin: clamp(44px, 6vw, 72px) auto 0;
+  max-width: 30rem;
+  text-align: center;
+}
+
+.advisory__sig-quote {
+  margin: 0;
+  font-family: 'Instrument Serif', serif;
   font-weight: 400;
+  font-style: italic;
+  font-size: clamp(1.25rem, 2vw, 1.6rem);
+  line-height: 1.45;
+  letter-spacing: -0.01em;
+  color: #cfdef0;
+  text-wrap: balance;
+}
+
+.advisory__sig-quote em {
+  font-style: italic;
+  color: var(--accent);
+}
+
+.advisory__sig-byline {
+  margin: 18px 0 0;
+  font-family: 'Geist Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: #8fa9c9;
 }
 
 .landfall-form {
   position: relative;
-  display: flex;
-  flex-direction: column;
   overflow: hidden;
   border: 1px solid rgba(160, 205, 255, 0.22);
   border-radius: 10px;
@@ -1300,23 +1599,10 @@
 .landfall-form__body {
   position: relative;
   z-index: 3;
-  flex: 1;
   display: flex;
   flex-direction: column;
   gap: 20px;
   padding: 12px 0 0;
-}
-
-.landfall-form__grow {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-}
-
-.landfall-form__grow textarea {
-  flex: 1;
-  min-height: 96px;
-  resize: none;
 }
 
 .landfall-form .flow-form-row {
@@ -1359,6 +1645,17 @@
 .landfall-form input:focus,
 .landfall-form textarea:focus {
   border-bottom-color: var(--accent);
+}
+
+.landfall-form textarea.flow-input--situation {
+  min-height: 0;
+  height: 2.4em;
+  max-height: 2.4em;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  resize: none;
+  overflow: hidden;
+  line-height: 1.35;
 }
 
 .flow-chips-select {
@@ -1465,9 +1762,17 @@
     right: -10%;
   }
 
-  .advisory__title {
-    font-size: clamp(2.8rem, 11vw, 4.4rem);
-    white-space: nowrap;
+  .advisory__art-text {
+    font-size: clamp(2.8rem, 12vw, 4.4rem);
+  }
+
+  .advisory__invite {
+    gap: 10px;
+  }
+
+  .advisory__invite-live {
+    font-size: 10.5px;
+    letter-spacing: 0.18em;
   }
 }
 
@@ -1476,9 +1781,8 @@
     display: none;
   }
 
-  .advisory__title {
-    font-size: clamp(2.4rem, 10.5vw, 3.4rem);
-    white-space: nowrap;
+  .advisory__art-text {
+    font-size: clamp(2.4rem, 11vw, 3.4rem);
   }
 }
 
