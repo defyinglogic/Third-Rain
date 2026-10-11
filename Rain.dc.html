@@ -166,7 +166,6 @@ html{-webkit-tap-highlight-color:transparent}
   <a href="#" onClick="{{ goTop }}" style="font-family:'Instrument Serif',serif;font-style:italic;font-size:38px;line-height:1;color:#eef5ff;display:inline-flex;align-items:baseline;">ra<span style="position:relative;display:inline-block;">ı<svg aria-hidden="true" viewBox="0 0 10 14" style="position:absolute;top:0;left:57%;transform:translateX(-50%);width:8px;height:11px;overflow:visible;filter:drop-shadow(0 0 6px var(--accent-glow));"><path d="M5 0C5 0 .8 5.6 .8 8.8a4.2 4.2 0 0 0 8.4 0C9.2 5.6 5 0 5 0Z" fill="var(--accent)"></path></svg></span>n<span style="color:var(--accent);">.</span></a>
   <div class="nav-links" style="display:flex;align-items:center;gap:clamp(14px,2.6vw,32px);flex-wrap:wrap;justify-content:flex-end;">
     <a href="#" onClick="{{ goServices }}" style="font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:#93aecd;" data-rf="nav.link.services">Services</a>
-    <a href="#" onClick="{{ goWork }}" style="font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:#93aecd;" data-rf="nav.link.work">Work</a>
     <a href="#" onClick="{{ goFounder }}" style="font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:#93aecd;" data-rf="nav.link.founder">Founder</a>
     <a href="#" class="nav-cta" onClick="{{ goContact }}" style="font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#dcecff;border:1px solid rgba(120,180,255,.35);padding:11px 22px;border-radius:999px;transition:all .3s ease;" style-hover="background:var(--accent-soft);border-color:var(--accent);box-shadow:0 0 24px var(--accent-glow);color:#ffffff;" data-rf="nav.cta">Start a project</a>
   </div>
@@ -353,94 +352,6 @@ html{-webkit-tap-highlight-color:transparent}
   </div>
 </section>
 
-<section class="gale" ref="{{ workRef }}" data-screen-label="Selected Work">
-  <div class="gale__head">
-    <div>
-      <p class="gale__eyebrow">Selected work</p>
-      <h2 class="gale__title">Work that made it <em>rain.</em></h2>
-    </div>
-    <p class="gale__hint" aria-hidden="true">Drag <span class="gale__hint-arrow">⟶</span></p>
-  </div>
-  <div class="gale__strip" data-gale="">
-    <article class="gale__panel gale__panel--live" style="--hue:255,106,90;">
-      <span class="gale__ghost" aria-hidden="true">001</span>
-      <p class="gale__ind">Haunted attractions — Live project</p>
-      <h3 class="gale__name">Castle of Chaos</h3>
-      <p class="gale__desc">Design &amp; build for one of America's premier haunted attractions — five levels of fear, built to sell out the season.</p>
-      <a class="gale__shot" href="https://www.castleofchaos.com/" target="_blank" rel="noopener">
-        <span class="gale__shot-bar" aria-hidden="true"><i></i><i></i><i></i><em>castleofchaos.com</em></span>
-        <span class="gale__shot-view"><img src="./work/coc-full.jpg" alt="The Castle of Chaos website, scrolling top to bottom" loading="lazy"></span>
-      </a>
-      <div class="gale__foot">
-        <a class="gale__visit" href="https://www.castleofchaos.com/" target="_blank" rel="noopener">Visit live site ↗</a>
-        <p class="gale__lab">castleofchaos.com</p>
-      </div>
-    </article>
-    <article class="gale__panel" style="--hue:86,185,255;">
-      <span class="gale__ghost" aria-hidden="true">002</span>
-      <p class="gale__ind">Private equity</p>
-      <h3 class="gale__name">Blueharbor Capital</h3>
-      <p class="gale__desc">Full rebrand, deal-room platform, and an AI-automated investor pipeline for a $2B fund.</p>
-      <div class="gale__foot">
-        <p class="gale__val">$6.8M</p>
-        <p class="gale__lab">Attributed revenue</p>
-      </div>
-    </article>
-    <article class="gale__panel" style="--hue:125,140,255;">
-      <span class="gale__ghost" aria-hidden="true">003</span>
-      <p class="gale__ind">Nightlife</p>
-      <h3 class="gale__name">Voltage After Dark</h3>
-      <p class="gale__desc">Brand, site, and a table-booking system with dynamic pricing for a three-venue nightlife group.</p>
-      <div class="gale__foot">
-        <p class="gale__val">+189%</p>
-        <p class="gale__lab">Table revenue</p>
-      </div>
-    </article>
-    <article class="gale__panel" style="--hue:63,224,200;">
-      <span class="gale__ghost" aria-hidden="true">004</span>
-      <p class="gale__ind">Medical aesthetics</p>
-      <h3 class="gale__name">Lumière Aesthetics</h3>
-      <p class="gale__desc">Booking platform and AI concierge that fills the calendar while the clinic sleeps.</p>
-      <div class="gale__foot">
-        <p class="gale__val">9,400</p>
-        <p class="gale__lab">Bookings a month</p>
-      </div>
-    </article>
-    <article class="gale__panel" style="--hue:183,201,255;">
-      <span class="gale__ghost" aria-hidden="true">005</span>
-      <p class="gale__ind">Exotic automotive</p>
-      <h3 class="gale__name">Vetta Motorcars</h3>
-      <p class="gale__desc">Digital showroom with allocation requests for a dealer whose cars sell before they land.</p>
-      <div class="gale__foot">
-        <p class="gale__val">$4.2M</p>
-        <p class="gale__lab">Allocation requests</p>
-      </div>
-    </article>
-    <article class="gale__panel" style="--hue:100,180,255;">
-      <span class="gale__ghost" aria-hidden="true">006</span>
-      <p class="gale__ind">Hospitality</p>
-      <h3 class="gale__name">Copperline Hotels</h3>
-      <p class="gale__desc">Direct-booking engine and brand site that cut the OTA middlemen out of the picture.</p>
-      <div class="gale__foot">
-        <p class="gale__val">+214%</p>
-        <p class="gale__lab">Direct bookings</p>
-      </div>
-    </article>
-    <article class="gale__panel" style="--hue:63,224,200;">
-      <span class="gale__ghost" aria-hidden="true">007</span>
-      <p class="gale__ind">Health systems</p>
-      <h3 class="gale__name">Solara Health</h3>
-      <p class="gale__desc">One scheduling and records platform rolled out across a twelve-clinic network.</p>
-      <div class="gale__foot">
-        <p class="gale__val">12</p>
-        <p class="gale__lab">Clinics live</p>
-      </div>
-    </article>
-  </div>
-  <div class="gale__meter" aria-hidden="true"><span data-gale-fill=""></span></div>
-  <p class="gale__note" data-rf="work.disclaimer">Castle of Chaos shown live — other names changed to protect the very profitable</p>
-</section>
-
 <section class="basin" ref="{{ founderRef }}" data-screen-label="Founder" data-basin="">
   <div class="basin__stage">
     <p class="basin__eyebrow" data-rf="founder.label">The founder</p>
@@ -558,7 +469,6 @@ class Component extends DCLogic {
     this.servicesRef = React.createRef();
     this.aiRef = React.createRef();
     this.founderRef = React.createRef();
-    this.workRef = React.createRef();
     this.contactRef = React.createRef();
     this.radarCanvas = React.createRef();
     this.emailRef = React.createRef();
@@ -1520,7 +1430,6 @@ class Component extends DCLogic {
       goServices: this.goTo(this.servicesRef),
       goAI: this.goTo(this.aiRef),
       goFounder: this.goTo(this.founderRef),
-      goWork: this.goTo(this.workRef), workRef: this.workRef,
       goContact: this.goTo(this.contactRef)
     };
   }
